@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleDrawer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AppleFactory.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionHandler.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathematics.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleDrawer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstaclesFactory.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLoader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeService.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppleDrawer.h" />
+    <ClInclude Include="AppleFactory.h" />
+    <ClInclude Include="CollisionHandler.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameMain.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Mathematics.h" />
+    <ClInclude Include="ObstacleDrawer.h" />
+    <ClInclude Include="ObstaclesFactory.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ResourceLoader.h" />
+    <ClInclude Include="TimeService.h" />
+    <ClInclude Include="UserInterface.h" />
+  </ItemGroup>
+</Project>
