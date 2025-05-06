@@ -40,16 +40,26 @@ namespace ApplesGame
 
 	void CollisionHandler::CheckCollisionWithApples()
 	{
-		for (int appleIndex = 0; appleIndex < NUM_APPLES; appleIndex++)
+		for (int appleIndex = 0; appleIndex < _gameData.apples.size(); appleIndex++)
 		{
 			if (HasPlayerCollisionWithApple(_gameData.apples[appleIndex]))
 			{
-				factory.CreateApple(_gameData.apples[appleIndex], _gameData.resourceData);
+				if (_gameData.gameModeBitMask & static_cast<uint32_t>(GameOptions::InfiniteApples))
+				{
+					factory.CreateApple(_gameData.apples[appleIndex], _gameData.resourceData);
+				}
+				else
+				{
+					factory.DestroyApple(_gameData.apples[appleIndex]);
+				}
 
 				_gameData.numEatenApples++;
 				_gameData.numOfPoints += POINTS_PER_APPLE;
 
-				_gameData.player.AccelerateMovementSpeed(ACCELERATION);
+				if (_gameData.gameModeBitMask & static_cast<uint32_t>(GameOptions::WithAcceleration))
+				{
+					_gameData.player.AccelerateMovementSpeed(ACCELERATION);
+				}
 
 				_gameData.resourceData.eatAppleSound.play();
 			}
@@ -58,7 +68,7 @@ namespace ApplesGame
 
 	void CollisionHandler::CheckCollisionWithObstacles()
 	{
-		for (int obstacleIndex = 0; obstacleIndex < NUM_APPLES; obstacleIndex++)
+		for (int obstacleIndex = 0; obstacleIndex < _gameData.apples.size(); obstacleIndex++)
 		{
 			if (HasPlayerCollisionWithObstacle(_gameData.obstacles[obstacleIndex]))
 			{

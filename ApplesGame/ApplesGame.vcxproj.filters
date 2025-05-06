@@ -46,6 +46,18 @@
     <ClCompile Include="UserInterface.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateMachine.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameplayState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppleDrawer.h" />
@@ -62,5 +74,9 @@
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="TimeService.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateMachine.h" />
+    <ClInclude Include="GameplayState.h" />
+    <ClInclude Include="MainMenuState.h" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@
 namespace ApplesGame
 {
 	const float APPLE_SIZE = 20.f;
-	const int NUM_APPLES = 20;
+	const int STANDARD_NUM_APPLES = 20, INCREASED_NUM_APPLES = 50;
 
 	struct AppleData
 	{
@@ -19,5 +19,8 @@ namespace ApplesGame
 	{
 	public:
 		void CreateApple(AppleData& appleData, ResourceData& resourceData);
+		void DestroyApple(AppleData& appleData);
+	private:
+		void InitAppleSprite(AppleData& appleData);
 	};
 }

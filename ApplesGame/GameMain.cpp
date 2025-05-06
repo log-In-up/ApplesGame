@@ -24,6 +24,9 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(ApplesGame::SCREEN_WIDTH, ApplesGame::SCREEN_HEIGHT), ApplesGame::TITLE_OF_THE_WINDOW);
 
 	ApplesGame::GameData gameData;
+	gameData.gameDifficultyMask = static_cast<uint32_t>(ApplesGame::GameDifficulty::Medium);
+	gameData.gameModeBitMask = static_cast<uint32_t>(ApplesGame::GameOptions::Default);
+
 	ApplesGame::Game game = ApplesGame::Game(gameData);
 	game.Initialization();
 
@@ -34,7 +37,7 @@ int main()
 
 		if (!window.isOpen())
 		{
-			return 0;
+			break;
 		}
 
 		game.Update(window);

@@ -163,7 +163,11 @@
     <ClCompile Include="CollisionHandler.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMain.cpp" />
+    <ClCompile Include="GameplayState.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Mathematics.cpp" />
     <ClCompile Include="ObstacleDrawer.cpp" />
     <ClCompile Include="ObstaclesFactory.cpp" />
@@ -178,7 +182,11 @@
     <ClInclude Include="CollisionHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMain.h" />
+    <ClInclude Include="GameplayState.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Mathematics.h" />
     <ClInclude Include="ObstacleDrawer.h" />
     <ClInclude Include="ObstaclesFactory.h" />

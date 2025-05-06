@@ -10,16 +10,31 @@ namespace ApplesGame
 	const float GAMEOVER_TIMEOUT = 2.f;
 	const int POINTS_PER_APPLE = 5;
 
+	enum class GameOptions
+	{
+		InfiniteApples = 1 << 0,	  // 01
+		WithAcceleration = 1 << 1,    // 10
+
+		Default = InfiniteApples | WithAcceleration
+	};
+
+	enum class GameDifficulty
+	{
+		Easy = 1 << 0,  // 001
+		Medium = 1 << 1,// 010
+		Hard = 1 << 2   // 100
+	};
+
 	struct GameData
 	{
 		Player player;
-		AppleData* apples{};
+		std::vector<AppleData> apples;
 		ObstacleData* obstacles{};
 		ResourceData resourceData;
-		int numEatenApples = 0;
-		int numOfPoints = 0;
-		bool isGameOver = false;
+		int numEatenApples = 0, numOfPoints = 0;
+		uint32_t gameModeBitMask = 0, gameDifficultyMask = 0;
 		float timeSinceGameOver = 0.f;
+		bool isGameOver = false;
 	};
 
 	class Game
@@ -31,9 +46,6 @@ namespace ApplesGame
 		void Initialization();
 		void Update(sf::RenderWindow& window);
 	private:
-		GameData& _gameData;
-		void RestartGame();
-		void UpdateGameOverState(float deltaTime);
-		void UpdateOnPlayState(float deltaTime);
+		GameData& gameData;
 	};
 }

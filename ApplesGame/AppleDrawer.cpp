@@ -4,7 +4,7 @@ namespace ApplesGame
 {
 	void AppleDrawer::DrawApples(const GameData& gameData, sf::RenderWindow& window)
 	{
-		for (int indexOfApple = 0; indexOfApple < NUM_APPLES; indexOfApple++)
+		for (int indexOfApple = 0; indexOfApple < gameData.apples.size(); indexOfApple++)
 		{
 			window.draw(gameData.apples[indexOfApple].sprite);
 		}
