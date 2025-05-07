@@ -7,6 +7,7 @@ namespace ApplesGame
 	{
 	public:
 		MainMenuState(GameData& gameData);
+		~MainMenuState();
 		void DrawGame(sf::RenderWindow& window) override;
 		void Initialization() override;
 		void Update(float deltaTime, sf::RenderWindow& window) override;

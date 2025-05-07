@@ -3,7 +3,7 @@
 #include "GameplayState.h"
 #include "InputHandler.h"
 #include "ObstacleDrawer.h"
-#include "UserInterface.h"
+#include "GameplayUserInterface.h"
 
 namespace ApplesGame
 {
@@ -13,7 +13,7 @@ namespace ApplesGame
 	InputHandler* inputHandler;
 	ObstacleDrawer* obstacleDrawer;
 	ObstaclesFactory obstaclesFactory;
-	UserInterface* userInterface;
+	GameplayUserInterface* userInterface;
 
 	GameplayState::GameplayState(GameData& gameData) : GameState(gameData)
 	{
@@ -33,7 +33,7 @@ namespace ApplesGame
 		inputHandler = new InputHandler();
 		obstacleDrawer = new ObstacleDrawer();
 		obstaclesFactory = ObstaclesFactory();
-		userInterface = new UserInterface();
+		userInterface = new GameplayUserInterface();
 	}
 
 	GameplayState::~GameplayState()

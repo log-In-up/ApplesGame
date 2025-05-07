@@ -10,7 +10,7 @@ namespace ApplesGame
 	const float GAMEOVER_TIMEOUT = 2.f;
 	const int POINTS_PER_APPLE = 5;
 
-	enum class GameOptions
+	enum class GameOptions : std::uint32_t
 	{
 		InfiniteApples = 1 << 0,	  // 01
 		WithAcceleration = 1 << 1,    // 10

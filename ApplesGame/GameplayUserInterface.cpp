@@ -1,4 +1,4 @@
-#include "UserInterface.h"
+#include "GameplayUserInterface.h"
 #include "Mathematics.h"
 #include "Game.h"
 
@@ -10,12 +10,12 @@ namespace ApplesGame
 	sf::Text inputHintText;
 	sf::Text gameOverText;
 
-	UserInterface::UserInterface()
+	GameplayUserInterface::GameplayUserInterface()
 	{
 		isGameOverTextVisible = false;
 	}
 
-	void UserInterface::DrawUI(sf::RenderWindow& window)
+	void GameplayUserInterface::DrawUI(sf::RenderWindow& window)
 	{
 		scoreText.setPosition(10.f, 10.f);
 		window.draw(scoreText);
@@ -30,7 +30,7 @@ namespace ApplesGame
 		}
 	}
 
-	void UserInterface::InitUI(const sf::Font& font)
+	void GameplayUserInterface::InitUI(const sf::Font& font)
 	{
 		scoreText.setFont(font);
 		scoreText.setCharacterSize(24);
@@ -51,7 +51,7 @@ namespace ApplesGame
 		gameOverText.setOrigin(GetTextOrigin(gameOverText, { 0.5f, 0.5f }));
 	}
 
-	void UserInterface::UpdateUI(GameData& gameData, float deltaTime)
+	void GameplayUserInterface::UpdateUI(GameData& gameData, float deltaTime)
 	{
 		scoreText.setString("Points: " + std::to_string(gameData.numOfPoints));
 

@@ -21,6 +21,7 @@ namespace ApplesGame
 
 		this->currentGameState = newGameState;
 		this->currentGameState->SetGameStateMachine(this);
+		this->currentGameState->Initialization();
 	}
 
 	void GameStateMachine::Update(float deltaTime, sf::RenderWindow& window)

@@ -43,7 +43,7 @@
     <ClCompile Include="TimeService.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="UserInterface.cpp">
+    <ClCompile Include="GameplayUserInterface.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="GameState.cpp">
@@ -56,6 +56,12 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuUI.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuInputHandler.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -73,10 +79,12 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="TimeService.h" />
-    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="GameplayUserInterface.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="GameplayState.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="MainMenuUI.h" />
+    <ClInclude Include="MenuInputHandler.h" />
   </ItemGroup>
 </Project>

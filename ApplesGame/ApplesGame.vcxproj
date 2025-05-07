@@ -168,13 +168,15 @@
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="MainMenuUI.cpp" />
     <ClCompile Include="Mathematics.cpp" />
+    <ClCompile Include="MenuInputHandler.cpp" />
     <ClCompile Include="ObstacleDrawer.cpp" />
     <ClCompile Include="ObstaclesFactory.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="TimeService.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="GameplayUserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppleDrawer.h" />
@@ -187,14 +189,16 @@
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="MainMenuUI.h" />
     <ClInclude Include="Mathematics.h" />
+    <ClInclude Include="MenuInputHandler.h" />
     <ClInclude Include="ObstacleDrawer.h" />
     <ClInclude Include="ObstaclesFactory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="TimeService.h" />
-    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="GameplayUserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

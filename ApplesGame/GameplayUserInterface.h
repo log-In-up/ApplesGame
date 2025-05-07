@@ -4,10 +4,10 @@
 
 namespace ApplesGame
 {
-	class UserInterface
+	class GameplayUserInterface
 	{
 	public:
-		UserInterface();
+		GameplayUserInterface();
 		void DrawUI(sf::RenderWindow& window);
 		void InitUI(const sf::Font& font);
 		void UpdateUI(GameData& gameData, float deltaTime);

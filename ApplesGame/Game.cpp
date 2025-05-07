@@ -34,6 +34,9 @@ namespace ApplesGame
 
 	void Game::Initialization()
 	{
+		gameData.gameDifficultyMask = static_cast<uint32_t>(ApplesGame::GameDifficulty::Easy);
+		gameData.gameModeBitMask = static_cast<uint32_t>(ApplesGame::GameOptions::Default);
+
 		resourceLoader->LoadResources(gameData.resourceData);
 
 		timeService->Initialization();
