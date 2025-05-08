@@ -10,10 +10,6 @@ namespace ApplesGame
 	{
 	}
 
-	void GameState::Initialization()
-	{
-	}
-
 	void GameState::SetGameStateMachine(GameStateMachine* gameStateMachine)
 	{
 		this->gameStateMachine = gameStateMachine;

@@ -9,6 +9,6 @@ namespace ApplesGame
 		GameData& gameData;
 	public:
 		MenuInputHandler(GameData& gameData);
-		void Update();
+		void Update(sf::RenderWindow& window, sf::Event& event);
 	};
 }

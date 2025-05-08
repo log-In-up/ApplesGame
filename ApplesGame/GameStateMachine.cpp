@@ -7,6 +7,11 @@ namespace ApplesGame
 		currentGameState->DrawGame(window);
 	}
 
+	void GameStateMachine::HandleWindowEvents(sf::RenderWindow& window, sf::Event& event)
+	{
+		currentGameState->HandleWindowEvents(window, event);
+	}
+
 	void GameStateMachine::Initialization()
 	{
 		currentGameState->Initialization();

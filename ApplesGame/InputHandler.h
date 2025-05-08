@@ -7,6 +7,6 @@ namespace ApplesGame
 	class InputHandler
 	{
 	public:
-		void ReadInputForPlayer(Player& player);
+		void ReadInputForPlayer(Player& player, sf::RenderWindow& window, sf::Event& event);
 	};
 }

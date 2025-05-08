@@ -43,6 +43,7 @@ namespace ApplesGame
 		Game(GameData& gameData);
 		~Game();
 		void DrawGame(sf::RenderWindow& window);
+		void HandleWindowEvents(sf::RenderWindow& window, sf::Event& event);
 		void Initialization();
 		void Update(sf::RenderWindow& window);
 	private:

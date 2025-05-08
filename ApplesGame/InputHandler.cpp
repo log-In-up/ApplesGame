@@ -3,23 +3,27 @@
 
 namespace ApplesGame
 {
-	void InputHandler::ReadInputForPlayer(Player& player)
+	void InputHandler::ReadInputForPlayer(Player& player, sf::RenderWindow& window, sf::Event& event)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		if (event.type == sf::Event::KeyPressed)
 		{
-			player.SetMovementDirection(PlayerDirection::Up);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			player.SetMovementDirection(PlayerDirection::Right);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			player.SetMovementDirection(PlayerDirection::Down);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			player.SetMovementDirection(PlayerDirection::Left);
+			switch (event.key.code)
+			{
+			case sf::Keyboard::Up:
+				player.SetMovementDirection(PlayerDirection::Up);
+				break;
+			case sf::Keyboard::Right:
+				player.SetMovementDirection(PlayerDirection::Right);
+				break;
+			case sf::Keyboard::Down:
+				player.SetMovementDirection(PlayerDirection::Down);
+				break;
+			case sf::Keyboard::Left:
+				player.SetMovementDirection(PlayerDirection::Left);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }

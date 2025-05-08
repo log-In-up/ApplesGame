@@ -62,6 +62,14 @@ namespace ApplesGame
 		userInterface->DrawUI(window);
 	}
 
+	void GameplayState::HandleWindowEvents(sf::RenderWindow& window, sf::Event& event)
+	{
+		if (!gameData.isGameOver)
+		{
+			inputHandler->ReadInputForPlayer(gameData.player, window, event);
+		}
+	}
+
 	void GameplayState::Initialization()
 	{
 		userInterface->InitUI(gameData.resourceData.font);
@@ -115,8 +123,6 @@ namespace ApplesGame
 
 	void GameplayState::UpdateOnPlayState(float deltaTime)
 	{
-		inputHandler->ReadInputForPlayer(gameData.player);
-
 		gameData.player.Update(deltaTime);
 
 		collisionHandler->Update();

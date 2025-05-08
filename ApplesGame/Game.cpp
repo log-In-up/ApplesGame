@@ -32,6 +32,18 @@ namespace ApplesGame
 		gameStateMachine->DrawGame(window);
 	}
 
+	void Game::HandleWindowEvents(sf::RenderWindow& window, sf::Event& event)
+	{
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+			gameStateMachine->HandleWindowEvents(window, event);
+		}
+	}
+
 	void Game::Initialization()
 	{
 		gameData.gameDifficultyMask = static_cast<uint32_t>(ApplesGame::GameDifficulty::Easy);

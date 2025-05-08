@@ -15,6 +15,7 @@ namespace ApplesGame
 		virtual ~GameState();
 
 		virtual void DrawGame(sf::RenderWindow& window) = 0;
+		virtual void HandleWindowEvents(sf::RenderWindow& window, sf::Event& event) = 0;
 		virtual void Initialization() = 0;
 		virtual void Update(float deltaTime, sf::RenderWindow& window) = 0;
 		void SetGameStateMachine(GameStateMachine* gameStateMachine);

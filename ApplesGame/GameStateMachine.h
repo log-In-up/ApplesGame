@@ -21,6 +21,7 @@ namespace ApplesGame
 		}
 
 		void DrawGame(sf::RenderWindow& window);
+		void HandleWindowEvents(sf::RenderWindow& window, sf::Event& event);
 		void Initialization();
 		void SwitchCurrentStateTo(GameState* newGameState);
 		void Update(float deltaTime, sf::RenderWindow& window);

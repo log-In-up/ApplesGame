@@ -7,27 +7,30 @@ namespace ApplesGame
 	{
 	}
 
-	void MenuInputHandler::Update()
+	void MenuInputHandler::Update(sf::RenderWindow& window, sf::Event& event)
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+		if (event.type == sf::Event::KeyPressed)
 		{
-			gameData.gameDifficultyMask = static_cast<uint32_t>(GameDifficulty::Easy);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
-		{
-			gameData.gameDifficultyMask = static_cast<uint32_t>(GameDifficulty::Medium);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
-		{
-			gameData.gameDifficultyMask = static_cast<uint32_t>(GameDifficulty::Hard);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
-		{
-			gameData.gameModeBitMask ^= static_cast<uint32_t>(GameOptions::InfiniteApples);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
-		{
-			gameData.gameModeBitMask ^= static_cast<uint32_t>(GameOptions::WithAcceleration);
+			switch (event.key.code)
+			{
+			case sf::Keyboard::Num1:
+				gameData.gameDifficultyMask = static_cast<uint32_t>(GameDifficulty::Easy);
+				break;
+			case sf::Keyboard::Num2:
+				gameData.gameDifficultyMask = static_cast<uint32_t>(GameDifficulty::Medium);
+				break;
+			case sf::Keyboard::Num3:
+				gameData.gameDifficultyMask = static_cast<uint32_t>(GameDifficulty::Hard);
+				break;
+			case sf::Keyboard::Num4:
+				gameData.gameModeBitMask ^= static_cast<uint32_t>(GameOptions::InfiniteApples);
+				break;
+			case sf::Keyboard::Num5:
+				gameData.gameModeBitMask ^= static_cast<uint32_t>(GameOptions::WithAcceleration);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }
