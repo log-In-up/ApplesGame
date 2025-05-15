@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+#include <unordered_map>
 
 namespace ApplesGame
 {
@@ -14,7 +15,6 @@ namespace ApplesGame
 		void Update(float deltaTime, sf::RenderWindow& window) override;
 	private:
 		void RestartGame();
-		void UpdateGameOverState(float deltaTime);
 		void UpdateOnPlayState(float deltaTime);
 	};
 }

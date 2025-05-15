@@ -3,7 +3,7 @@
 
 namespace ApplesGame
 {
-	void InputHandler::ReadInputForPlayer(Player& player, sf::RenderWindow& window, sf::Event& event)
+	void InputHandler::ReadInputForPlayer(Player& player, sf::Event& event)
 	{
 		if (event.type == sf::Event::KeyPressed)
 		{

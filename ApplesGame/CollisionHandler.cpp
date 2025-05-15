@@ -1,9 +1,10 @@
 #include "CollisionHandler.h"
 #include "GameMain.h"
+#include "Utils.h"
 
 namespace ApplesGame
 {
-	CollisionHandler::CollisionHandler(GameData& gameData, AppleFactory& appleFactory) : _gameData(gameData), factory(appleFactory)
+	CollisionHandler::CollisionHandler(GameData& gameData, AppleFactory& appleFactory) : gameData(gameData), appleFactory(appleFactory)
 	{
 	}
 
@@ -16,64 +17,63 @@ namespace ApplesGame
 
 	bool CollisionHandler::HasPlayerCollisionWithApple(const AppleData& apple)
 	{
-		float deltaX = _gameData.player.position.x - apple.position.x;
-		float deltaY = _gameData.player.position.y - apple.position.y;
+		float deltaX = gameData.player.position.x - apple.position.x;
+		float deltaY = gameData.player.position.y - apple.position.y;
 		float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
 		return distance < (PLAYER_SIZE + APPLE_SIZE) / 2.f;
 	}
 
 	bool CollisionHandler::HasPlayerCollisionWithObstacle(const ObstacleData& obstacle)
 	{
-		float deltaX = _gameData.player.position.x - obstacle.position.x;
-		float deltaY = _gameData.player.position.y - obstacle.position.y;
+		float deltaX = gameData.player.position.x - obstacle.position.x;
+		float deltaY = gameData.player.position.y - obstacle.position.y;
 		float distance = sqrt(deltaX * deltaX + deltaY * deltaY);
 		return distance < (PLAYER_SIZE + OBSTACLE_SIZE) / 2.f;
 	}
 
 	bool CollisionHandler::HasPlayerCollisionWithScreenBorder()
 	{
-		return (_gameData.player.position.x - PLAYER_SIZE / 2.f < 0) ||
-			(_gameData.player.position.x + PLAYER_SIZE / 2.f > SCREEN_WIDTH) ||
-			(_gameData.player.position.y - PLAYER_SIZE / 2.f < 0) ||
-			(_gameData.player.position.y + PLAYER_SIZE / 2.f > SCREEN_HEIGHT);
+		return (gameData.player.position.x - PLAYER_SIZE / 2.f < 0) ||
+			(gameData.player.position.x + PLAYER_SIZE / 2.f > SCREEN_WIDTH) ||
+			(gameData.player.position.y - PLAYER_SIZE / 2.f < 0) ||
+			(gameData.player.position.y + PLAYER_SIZE / 2.f > SCREEN_HEIGHT);
 	}
 
 	void CollisionHandler::CheckCollisionWithApples()
 	{
-		for (int appleIndex = 0; appleIndex < _gameData.apples.size(); appleIndex++)
+		for (int appleIndex = 0; appleIndex < gameData.apples.size(); appleIndex++)
 		{
-			if (HasPlayerCollisionWithApple(_gameData.apples[appleIndex]))
+			if (HasPlayerCollisionWithApple(gameData.apples[appleIndex]))
 			{
-				if (_gameData.gameModeBitMask & static_cast<uint32_t>(GameOptions::InfiniteApples))
+				if (gameData.gameModeBitMask & static_cast<uint32_t>(GameOptions::InfiniteApples))
 				{
-					factory.CreateApple(_gameData.apples[appleIndex], _gameData.resourceData);
+					appleFactory.CreateApple(gameData.apples[appleIndex], gameData.resourceData);
 				}
 				else
 				{
-					factory.DestroyApple(_gameData.apples[appleIndex]);
+					appleFactory.DestroyApple(gameData.apples[appleIndex]);
 				}
 
-				_gameData.numEatenApples++;
-				_gameData.numOfPoints += POINTS_PER_APPLE;
+				gameData.numEatenApples++;
+				gameData.numOfPoints += POINTS_PER_APPLE;
 
-				if (_gameData.gameModeBitMask & static_cast<uint32_t>(GameOptions::WithAcceleration))
+				if (gameData.gameModeBitMask & static_cast<uint32_t>(GameOptions::WithAcceleration))
 				{
-					_gameData.player.AccelerateMovementSpeed(ACCELERATION);
+					gameData.player.AccelerateMovementSpeed(ACCELERATION);
 				}
 
-				_gameData.resourceData.eatAppleSound.play();
+				gameData.resourceData.eatAppleSound.play();
 			}
 		}
 	}
 
 	void CollisionHandler::CheckCollisionWithObstacles()
 	{
-		for (int obstacleIndex = 0; obstacleIndex < _gameData.apples.size(); obstacleIndex++)
+		for (int obstacleIndex = 0; obstacleIndex < gameData.apples.size(); obstacleIndex++)
 		{
-			if (HasPlayerCollisionWithObstacle(_gameData.obstacles[obstacleIndex]))
+			if (HasPlayerCollisionWithObstacle(gameData.obstacles[obstacleIndex]))
 			{
-				_gameData.isGameOver = true;
-				_gameData.resourceData.gameOverSound.play();
+				LaunchGameOverSubstate();
 				break;
 			}
 		}
@@ -83,8 +83,21 @@ namespace ApplesGame
 	{
 		if (HasPlayerCollisionWithScreenBorder())
 		{
-			_gameData.isGameOver = true;
-			_gameData.resourceData.gameOverSound.play();
+			LaunchGameOverSubstate();
 		}
+	}
+
+	void CollisionHandler::LaunchGameOverSubstate()
+	{
+		UpdateRecord(PLAYER_NAME, gameData.numEatenApples);
+		SelectionSort(gameData.recordsTable);
+
+		gameData.isGameOver = true;
+		gameData.resourceData.gameOverSound.play();
+	}
+
+	void CollisionHandler::UpdateRecord(const std::string& playerId, int score)
+	{
+		gameData.recordsTable[playerId] = std::max(gameData.recordsTable[playerId], score);
 	}
 }

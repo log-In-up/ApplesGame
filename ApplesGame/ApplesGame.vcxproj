@@ -177,6 +177,7 @@
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="TimeService.cpp" />
     <ClCompile Include="GameplayUserInterface.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppleDrawer.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="TimeService.h" />
     <ClInclude Include="GameplayUserInterface.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

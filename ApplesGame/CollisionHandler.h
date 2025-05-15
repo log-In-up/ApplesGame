@@ -1,7 +1,7 @@
 #pragma once
+#include <unordered_map>
 
 #include "Game.h"
-
 namespace ApplesGame
 {
 	class CollisionHandler
@@ -10,8 +10,8 @@ namespace ApplesGame
 		CollisionHandler(GameData& gameData, AppleFactory& appleFactory);
 		void Update();
 	private:
-		GameData& _gameData;
-		AppleFactory& factory;
+		GameData& gameData;
+		AppleFactory& appleFactory;
 
 		bool HasPlayerCollisionWithApple(const AppleData& apple);
 		bool HasPlayerCollisionWithObstacle(const ObstacleData& obstacle);
@@ -19,5 +19,7 @@ namespace ApplesGame
 		void CheckCollisionWithApples();
 		void CheckCollisionWithObstacles();
 		void CheckScreenBordersCollision();
+		void LaunchGameOverSubstate();
+		void UpdateRecord(const std::string& playerId, int score);
 	};
 }

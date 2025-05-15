@@ -64,6 +64,9 @@
     <ClCompile Include="MenuInputHandler.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppleDrawer.h" />
@@ -86,5 +89,6 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MainMenuUI.h" />
     <ClInclude Include="MenuInputHandler.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
 </Project>

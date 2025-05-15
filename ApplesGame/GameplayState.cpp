@@ -24,8 +24,16 @@ namespace ApplesGame
 		{
 			this->gameData.apples.push_back(AppleData());
 		}
-
 		this->gameData.obstacles = new ObstacleData[NUM_OBSTACLES];
+
+		this->gameData.recordsTable =
+		{
+			{"Carol", 55},
+			{"Jane", 30 },
+			{"Alice", 120 },
+			{"Bob", 85 }
+		};
+		this->gameData.recordsTable.insert({ PLAYER_NAME, 0 });
 
 		appleDrawer = new AppleDrawer();
 		appleFactory = AppleFactory();
@@ -33,7 +41,7 @@ namespace ApplesGame
 		inputHandler = new InputHandler();
 		obstacleDrawer = new ObstacleDrawer();
 		obstaclesFactory = ObstaclesFactory();
-		userInterface = new GameplayUserInterface();
+		userInterface = new GameplayUserInterface(this->gameData.recordsTable);
 	}
 
 	GameplayState::~GameplayState()
@@ -66,7 +74,17 @@ namespace ApplesGame
 	{
 		if (!gameData.isGameOver)
 		{
-			inputHandler->ReadInputForPlayer(gameData.player, window, event);
+			inputHandler->ReadInputForPlayer(gameData.player, event);
+		}
+		else
+		{
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::R)
+				{
+					RestartGame();
+				}
+			}
 		}
 	}
 
@@ -79,11 +97,7 @@ namespace ApplesGame
 
 	void GameplayState::Update(float deltaTime, sf::RenderWindow& window)
 	{
-		if (gameData.isGameOver)
-		{
-			UpdateGameOverState(deltaTime);
-		}
-		else
+		if (!gameData.isGameOver)
 		{
 			UpdateOnPlayState(deltaTime);
 		}
@@ -108,17 +122,6 @@ namespace ApplesGame
 		gameData.numEatenApples = 0;
 		gameData.numOfPoints = 0;
 		gameData.isGameOver = false;
-		gameData.timeSinceGameOver = 0.f;
-	}
-
-	void GameplayState::UpdateGameOverState(float deltaTime)
-	{
-		gameData.timeSinceGameOver += deltaTime;
-
-		if (gameData.timeSinceGameOver >= GAMEOVER_TIMEOUT)
-		{
-			RestartGame();
-		}
 	}
 
 	void GameplayState::UpdateOnPlayState(float deltaTime)
