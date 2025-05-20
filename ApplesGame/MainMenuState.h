@@ -5,6 +5,8 @@ namespace ApplesGame
 {
 	class MainMenuState : public GameState
 	{
+	private:
+		std::string GetDifficultyName();
 	public:
 		MainMenuState(GameData& gameData);
 		~MainMenuState();

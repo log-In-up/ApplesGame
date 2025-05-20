@@ -21,8 +21,7 @@ namespace ApplesGame
 				}
 			}
 
-			// Move minimum element to its
-			// correct position
+			// Move minimum element to it's correct position
 			std::pair<std::string, int> ith_element = *std::next(map.begin(), i);
 			std::pair<std::string, int> min_idx_element = *std::next(map.begin(), min_idx);
 

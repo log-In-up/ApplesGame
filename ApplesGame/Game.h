@@ -1,10 +1,10 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <map>
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
-#include "Player.h"
 #include "ObstaclesFactory.h"
+#include "Player.h"
 #include "ResourceLoader.h"
 
 namespace ApplesGame
@@ -38,12 +38,15 @@ namespace ApplesGame
 		ResourceData resourceData;
 		RecordsTable recordsTable;
 		int numEatenApples = 0, numOfPoints = 0;
-		uint32_t gameModeBitMask = 0, gameDifficultyMask = 0;
+		uint32_t gameModeBitMask = static_cast<uint32_t>(ApplesGame::GameOptions::Default);
+		uint32_t gameDifficultyMask = static_cast<uint32_t>(ApplesGame::GameDifficulty::Easy);
 		bool isGameOver = false;
 	};
 
 	class Game
 	{
+	private:
+		GameData& gameData;
 	public:
 		Game(GameData& gameData);
 		~Game();
@@ -51,7 +54,5 @@ namespace ApplesGame
 		void HandleWindowEvents(sf::RenderWindow& window, sf::Event& event);
 		void Initialization();
 		void Update(sf::RenderWindow& window);
-	private:
-		GameData& gameData;
 	};
 }

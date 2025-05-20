@@ -2,8 +2,8 @@
 
 #include "Game.h"
 #include "GameMain.h"
-#include "MainMenuState.h"
 #include "GameStateMachine.h"
+#include "MainMenuState.h"
 #include "ResourceLoader.h"
 #include "TimeService.h"
 
@@ -18,6 +18,15 @@ namespace ApplesGame
 		resourceLoader = new ResourceLoader();
 		timeService = new TimeService();
 		gameStateMachine = new GameStateMachine(new MainMenuState(this->gameData));
+
+		gameData.recordsTable =
+		{
+			{"Carol", 55},
+			{"Jane", 30 },
+			{"Alice", 120 },
+			{"Bob", 85 }
+		};
+		gameData.recordsTable.insert({ PLAYER_NAME, 0 });
 	}
 
 	Game::~Game()
@@ -25,6 +34,8 @@ namespace ApplesGame
 		delete resourceLoader;
 		delete timeService;
 		delete gameStateMachine;
+
+		gameData.recordsTable.clear();
 	}
 
 	void Game::DrawGame(sf::RenderWindow& window)
@@ -46,9 +57,6 @@ namespace ApplesGame
 
 	void Game::Initialization()
 	{
-		gameData.gameDifficultyMask = static_cast<uint32_t>(ApplesGame::GameDifficulty::Easy);
-		gameData.gameModeBitMask = static_cast<uint32_t>(ApplesGame::GameOptions::Default);
-
 		resourceLoader->LoadResources(gameData.resourceData);
 
 		timeService->Initialization();

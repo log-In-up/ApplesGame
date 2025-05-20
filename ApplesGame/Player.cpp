@@ -1,7 +1,8 @@
-#include <SFML/Graphics.hpp>
 #include <cassert>
-#include "Player.h"
+#include <SFML/Graphics.hpp>
+
 #include "GameMain.h"
+#include "Player.h"
 #include "ResourceLoader.h"
 
 namespace ApplesGame

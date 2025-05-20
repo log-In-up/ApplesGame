@@ -58,13 +58,19 @@
     <ClCompile Include="MainMenuState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuUI.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuInputHandler.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Utils.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LeaderBoardState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LeaderboardDrawer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,8 +93,10 @@
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="GameplayState.h" />
     <ClInclude Include="MainMenuState.h" />
-    <ClInclude Include="MainMenuUI.h" />
-    <ClInclude Include="MenuInputHandler.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="LeaderBoardState.h" />
+    <ClInclude Include="LeaderboardDrawer.h" />
+    <ClInclude Include="Menu.h" />
   </ItemGroup>
 </Project>

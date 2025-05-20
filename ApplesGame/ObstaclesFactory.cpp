@@ -1,5 +1,5 @@
-#include "ObstaclesFactory.h"
 #include "GameMain.h"
+#include "ObstaclesFactory.h"
 
 namespace ApplesGame
 {

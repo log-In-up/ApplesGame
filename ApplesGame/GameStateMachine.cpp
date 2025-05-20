@@ -14,16 +14,10 @@ namespace ApplesGame
 
 	void GameStateMachine::Initialization()
 	{
-		currentGameState->Initialization();
 	}
 
 	void GameStateMachine::SwitchCurrentStateTo(GameState* newGameState)
 	{
-		if (this->currentGameState != nullptr)
-		{
-			delete this->currentGameState;
-		}
-
 		this->currentGameState = newGameState;
 		this->currentGameState->SetGameStateMachine(this);
 		this->currentGameState->Initialization();

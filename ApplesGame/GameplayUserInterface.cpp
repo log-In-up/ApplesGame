@@ -1,7 +1,9 @@
-#include "GameplayUserInterface.h"
-#include "Mathematics.h"
-#include "GameMain.h"
 #include "Game.h"
+#include "GameMain.h"
+#include "GameplayUserInterface.h"
+#include "LeaderboardDrawer.h"
+#include "Mathematics.h"
+#include "Text.h"
 
 namespace ApplesGame
 {
@@ -11,22 +13,19 @@ namespace ApplesGame
 	sf::Text inputHintText;
 	sf::Text restartGameHintText;
 	sf::Text gameOverText;
-	std::vector<sf::Text> players;
 
-	GameplayUserInterface::GameplayUserInterface(std::map<std::string, int>& recordsTable) : recordsTable(recordsTable)
+	LeaderboardDrawer* leaderboardUIDrawer;
+
+	GameplayUserInterface::GameplayUserInterface(GameData& gameData) : recordsTable(gameData.recordsTable), gameData(gameData)
 	{
 		isGameOverTextVisible = false;
 
-		for (std::pair<std::string, int> record : recordsTable)
-		{
-			sf::Text text;
-			players.push_back(text);
-		}
+		leaderboardUIDrawer = new LeaderboardDrawer(this->recordsTable);
 	}
 
 	GameplayUserInterface::~GameplayUserInterface()
 	{
-		players.clear();
+		delete leaderboardUIDrawer;
 	}
 
 	void GameplayUserInterface::DrawUI(sf::RenderWindow& window)
@@ -61,32 +60,14 @@ namespace ApplesGame
 		gameOverText.setString("GAME OVER");
 		gameOverText.setOrigin(GetTextOrigin(gameOverText, { 0.5f, 0.5f }));
 
-		for (int index = 0; index < recordsTable.size(); index++)
-		{
-			SetTextData(players[index], font, LEADERBOARD_SIZE, sf::Color::White);
-		}
+		leaderboardUIDrawer->Initialization(font);
 	}
 
-	void GameplayUserInterface::UpdateUI(GameData& gameData, float deltaTime)
+	void GameplayUserInterface::UpdateUI(float deltaTime)
 	{
 		scoreText.setString("Points: " + std::to_string(gameData.numOfPoints));
 
 		isGameOverTextVisible = gameData.isGameOver;
-	}
-
-	void GameplayUserInterface::DrawLeaderboard(sf::RenderWindow& window)
-	{
-		float y;
-		for (int index = 0; index < players.size(); index++)
-		{
-			std::pair<const std::string, int>& record = *std::next(recordsTable.begin(), index);
-			y = (float(LEADERBOARD_SIZE * index) + 10.f) + 20.f;
-
-			players[index].setString(record.first + " " + std::to_string(record.second));
-			players[index].setPosition(window.getSize().x / 2.f - 20.f, window.getSize().y / 2.f + y);
-
-			window.draw(players[index]);
-		}
 	}
 
 	void GameplayUserInterface::DrawTextOnGameOver(sf::RenderWindow& window)
@@ -97,13 +78,6 @@ namespace ApplesGame
 		restartGameHintText.setPosition(10.f, window.getSize().y - 20.f - (float)RESTART_GAME_SIZE);
 		window.draw(restartGameHintText);
 
-		DrawLeaderboard(window);
-	}
-
-	void GameplayUserInterface::SetTextData(sf::Text& text, const sf::Font& font, unsigned int size, const sf::Color color)
-	{
-		text.setFont(font);
-		text.setCharacterSize(size);
-		text.setFillColor(color);
+		leaderboardUIDrawer->DrawLeaderboard(window);
 	}
 }

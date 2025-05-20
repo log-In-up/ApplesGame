@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "GameState.h"
+
 #include "Game.h"
+#include "GameState.h"
 
 namespace ApplesGame
 {

@@ -1,8 +1,8 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
-#include "Mathematics.h"
+
 #include "AppleFactory.h"
+#include "Mathematics.h"
 #include "ObstaclesFactory.h"
 #include "ResourceLoader.h"
 

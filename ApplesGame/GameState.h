@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
 #include "Game.h"
 
 namespace ApplesGame
@@ -8,6 +9,9 @@ namespace ApplesGame
 
 	class GameState
 	{
+	protected:
+		GameStateMachine* gameStateMachine;
+		GameData& gameData;
 	public:
 		GameState() = default;
 		GameState(GameData& gameData);
@@ -19,9 +23,5 @@ namespace ApplesGame
 		virtual void Initialization() = 0;
 		virtual void Update(float deltaTime, sf::RenderWindow& window) = 0;
 		void SetGameStateMachine(GameStateMachine* gameStateMachine);
-
-	protected:
-		GameStateMachine* gameStateMachine;
-		GameData& gameData;
 	};
 }

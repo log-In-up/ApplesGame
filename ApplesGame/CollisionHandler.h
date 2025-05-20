@@ -2,17 +2,18 @@
 #include <unordered_map>
 
 #include "Game.h"
+
 namespace ApplesGame
 {
 	class CollisionHandler
 	{
+	private:
+		GameData& gameData;
+		AppleFactory& appleFactory;
 	public:
 		CollisionHandler(GameData& gameData, AppleFactory& appleFactory);
 		void Update();
 	private:
-		GameData& gameData;
-		AppleFactory& appleFactory;
-
 		bool HasPlayerCollisionWithApple(const AppleData& apple);
 		bool HasPlayerCollisionWithObstacle(const ObstacleData& obstacle);
 		bool HasPlayerCollisionWithScreenBorder();

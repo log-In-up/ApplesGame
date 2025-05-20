@@ -1,9 +1,9 @@
 #include "AppleDrawer.h"
 #include "CollisionHandler.h"
 #include "GameplayState.h"
+#include "GameplayUserInterface.h"
 #include "InputHandler.h"
 #include "ObstacleDrawer.h"
-#include "GameplayUserInterface.h"
 
 namespace ApplesGame
 {
@@ -12,7 +12,7 @@ namespace ApplesGame
 	CollisionHandler* collisionHandler;
 	InputHandler* inputHandler;
 	ObstacleDrawer* obstacleDrawer;
-	ObstaclesFactory obstaclesFactory;
+	ObstaclesFactory* obstaclesFactory;
 	GameplayUserInterface* userInterface;
 
 	GameplayState::GameplayState(GameData& gameData) : GameState(gameData)
@@ -26,22 +26,13 @@ namespace ApplesGame
 		}
 		this->gameData.obstacles = new ObstacleData[NUM_OBSTACLES];
 
-		this->gameData.recordsTable =
-		{
-			{"Carol", 55},
-			{"Jane", 30 },
-			{"Alice", 120 },
-			{"Bob", 85 }
-		};
-		this->gameData.recordsTable.insert({ PLAYER_NAME, 0 });
-
 		appleDrawer = new AppleDrawer();
 		appleFactory = AppleFactory();
 		collisionHandler = new CollisionHandler(this->gameData, appleFactory);
 		inputHandler = new InputHandler();
 		obstacleDrawer = new ObstacleDrawer();
-		obstaclesFactory = ObstaclesFactory();
-		userInterface = new GameplayUserInterface(this->gameData.recordsTable);
+		obstaclesFactory = new ObstaclesFactory();
+		userInterface = new GameplayUserInterface(this->gameData);
 	}
 
 	GameplayState::~GameplayState()
@@ -102,7 +93,7 @@ namespace ApplesGame
 			UpdateOnPlayState(deltaTime);
 		}
 
-		userInterface->UpdateUI(gameData, deltaTime);
+		userInterface->UpdateUI(deltaTime);
 	}
 
 	void GameplayState::RestartGame()
@@ -116,7 +107,7 @@ namespace ApplesGame
 
 		for (int indexOfObstacle = 0; indexOfObstacle < NUM_OBSTACLES; indexOfObstacle++)
 		{
-			obstaclesFactory.CreateObstacle(gameData.obstacles[indexOfObstacle], gameData.resourceData);
+			obstaclesFactory->CreateObstacle(gameData.obstacles[indexOfObstacle], gameData.resourceData);
 		}
 
 		gameData.numEatenApples = 0;
