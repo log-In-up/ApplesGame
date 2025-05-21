@@ -2,8 +2,12 @@
 #include "CollisionHandler.h"
 #include "GameplayState.h"
 #include "GameplayUserInterface.h"
+#include "GameStateMachine.h"
 #include "InputHandler.h"
+#include "MainMenuState.h"
 #include "ObstacleDrawer.h"
+#include "Text.h"
+#include "TimeService.h"
 
 namespace ApplesGame
 {
@@ -63,13 +67,23 @@ namespace ApplesGame
 
 	void GameplayState::HandleWindowEvents(sf::RenderWindow& window, sf::Event& event)
 	{
-		if (!gameData.isGameOver)
+		if (event.type == sf::Event::KeyPressed)
 		{
-			inputHandler->ReadInputForPlayer(gameData.player, event);
-		}
-		else
-		{
-			if (event.type == sf::Event::KeyPressed)
+			bool gameIsPaused = TimeIsPaused();
+
+			if (!gameData.isGameOver)
+			{
+				if (!gameIsPaused)
+				{
+					inputHandler->ReadInputForPlayer(gameData.player, event);
+				}
+
+				if (event.key.code == sf::Keyboard::P)
+				{
+					SetPause(!gameIsPaused);
+				}
+			}
+			else
 			{
 				if (event.key.code == sf::Keyboard::R)
 				{
@@ -77,11 +91,53 @@ namespace ApplesGame
 				}
 			}
 		}
+
+		userInterface->HandleWindowEvents(window, event);
 	}
 
 	void GameplayState::Initialization()
 	{
-		userInterface->InitUI(gameData.resourceData.font);
+		auto setTextData = [](sf::Text& text, const std::string string, sf::Font& font, unsigned int size)
+			{
+				text.setString(string);
+				text.setFont(font);
+				text.setCharacterSize(size);
+			};
+
+		auto setTextColorData = [setTextData](sf::Text& text, const std::string string, sf::Font& font, unsigned int size, sf::Color color)
+			{
+				setTextData(text, string, font, size);
+				text.setFillColor(color);
+			};
+
+		auto setChildrenData = [](MenuItem& item, Orientation orientation, Alignment alignment, float spacing)
+			{
+				item.childrenOrientation = orientation;
+				item.childrenAlignment = alignment;
+				item.childrenSpacing = spacing;
+			};
+
+		MenuItem continuePlay;
+		setTextData(continuePlay.text, "Continue", gameData.resourceData.font, 24);
+		continuePlay.onPressCallback = [this](MenuItem& item)
+			{
+				SetPause(false);
+			};
+
+		MenuItem backToMainMenu;
+		setTextData(backToMainMenu.text, "Exit to menu", gameData.resourceData.font, 24);
+		backToMainMenu.onPressCallback = [this](MenuItem& item)
+			{
+				gameStateMachine->SwitchCurrentStateTo(new MainMenuState(gameData));
+			};
+
+		MenuItem pause;
+		setTextColorData(pause.hintText, "Pause", gameData.resourceData.font, 48, sf::Color::Red);
+		setChildrenData(pause, Orientation::Vertical, Alignment::Middle, 10.f);
+		pause.childrens.push_back(continuePlay);
+		pause.childrens.push_back(backToMainMenu);
+
+		userInterface->InitUI(gameData.resourceData.font, pause);
 
 		RestartGame();
 	}
@@ -113,6 +169,8 @@ namespace ApplesGame
 		gameData.numEatenApples = 0;
 		gameData.numOfPoints = 0;
 		gameData.isGameOver = false;
+
+		SetPause(false);
 	}
 
 	void GameplayState::UpdateOnPlayState(float deltaTime)

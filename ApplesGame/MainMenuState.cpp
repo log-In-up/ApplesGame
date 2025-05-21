@@ -156,7 +156,6 @@ namespace ApplesGame
 		setTextData(yesItem.text, "Yes", gameData.resourceData.font, 24);
 		yesItem.onPressCallback = [](MenuItem& item)
 			{
-				//Application::Instance().GetGame().SwitchStateTo(GameStateType::None);
 			};
 
 		MenuItem noItem;
@@ -187,6 +186,7 @@ namespace ApplesGame
 	void MainMenuState::Update(float deltaTime, sf::RenderWindow& window)
 	{
 	}
+
 	std::string MainMenuState::GetDifficultyName()
 	{
 		std::string difficulty = "";

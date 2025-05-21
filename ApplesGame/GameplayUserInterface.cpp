@@ -3,7 +3,9 @@
 #include "GameplayUserInterface.h"
 #include "LeaderboardDrawer.h"
 #include "Mathematics.h"
+#include "Menu.h"
 #include "Text.h"
+#include "TimeService.h"
 
 namespace ApplesGame
 {
@@ -15,17 +17,20 @@ namespace ApplesGame
 	sf::Text gameOverText;
 
 	LeaderboardDrawer* leaderboardUIDrawer;
+	Menu* pauseMenu;
 
 	GameplayUserInterface::GameplayUserInterface(GameData& gameData) : recordsTable(gameData.recordsTable), gameData(gameData)
 	{
 		isGameOverTextVisible = false;
 
 		leaderboardUIDrawer = new LeaderboardDrawer(this->recordsTable);
+		pauseMenu = new Menu();
 	}
 
 	GameplayUserInterface::~GameplayUserInterface()
 	{
 		delete leaderboardUIDrawer;
+		delete pauseMenu;
 	}
 
 	void GameplayUserInterface::DrawUI(sf::RenderWindow& window)
@@ -40,9 +45,48 @@ namespace ApplesGame
 		{
 			DrawTextOnGameOver(window);
 		}
+
+		if (TimeIsPaused())
+		{
+			sf::Vector2f viewSize = (sf::Vector2f)window.getView().getSize();
+
+			sf::Text* hintText = &pauseMenu->GetCurrentContext().hintText;
+			hintText->setOrigin(GetTextOrigin(*hintText, { 0.5f, 0.f }));
+			hintText->setPosition(viewSize.x / 2.f, 150.f);
+			window.draw(*hintText);
+
+			pauseMenu->Draw(window, viewSize / 2.f, { 0.5f, 0.f });
+		}
 	}
 
-	void GameplayUserInterface::InitUI(const sf::Font& font)
+	void GameplayUserInterface::HandleWindowEvents(sf::RenderWindow& window, sf::Event& event)
+	{
+		if (event.type == sf::Event::KeyPressed)
+		{
+			if (event.key.code == sf::Keyboard::Escape)
+			{
+				pauseMenu->GoBack();
+			}
+			else if (event.key.code == sf::Keyboard::Enter)
+			{
+				pauseMenu->PressOnSelectedItem();
+			}
+
+			Orientation orientation = pauseMenu->GetCurrentContext().childrenOrientation;
+			if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::Up ||
+				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::Left)
+			{
+				pauseMenu->SwitchToPreviousMenuItem();
+			}
+			else if (orientation == Orientation::Vertical && event.key.code == sf::Keyboard::Down ||
+				orientation == Orientation::Horizontal && event.key.code == sf::Keyboard::Right)
+			{
+				pauseMenu->SwitchToNextMenuItem();
+			}
+		}
+	}
+
+	void GameplayUserInterface::InitUI(const sf::Font& font, const MenuItem& item)
 	{
 		isGameOverTextVisible = false;
 
@@ -61,6 +105,8 @@ namespace ApplesGame
 		gameOverText.setOrigin(GetTextOrigin(gameOverText, { 0.5f, 0.5f }));
 
 		leaderboardUIDrawer->Initialization(font);
+
+		pauseMenu->Initialization(item);
 	}
 
 	void GameplayUserInterface::UpdateUI(float deltaTime)

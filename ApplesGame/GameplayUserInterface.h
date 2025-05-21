@@ -3,6 +3,7 @@
 
 #include "Game.h"
 #include "SFML/Graphics.hpp"
+#include "Text.h"
 
 namespace ApplesGame
 {
@@ -20,7 +21,8 @@ namespace ApplesGame
 		GameplayUserInterface(GameData& gameData);
 		~GameplayUserInterface();
 		void DrawUI(sf::RenderWindow& window);
-		void InitUI(const sf::Font& font);
+		void HandleWindowEvents(sf::RenderWindow& window, sf::Event& event);
+		void InitUI(const sf::Font& font, const MenuItem& item);
 		void UpdateUI(float deltaTime);
 	private:
 		void DrawTextOnGameOver(sf::RenderWindow& window);
